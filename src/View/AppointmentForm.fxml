@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.AppointmentController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="575.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AppointmentController">
+   <children>
+      <Label layoutX="178.0" layoutY="14.0" text="Appointment">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="105.0" text="Title" />
+      <Label layoutX="65.0" layoutY="145.0" text="Description" />
+      <Label layoutX="65.0" layoutY="185.0" text="Location" />
+      <Label layoutX="65.0" layoutY="225.0" text="Contact" />
+      <Label layoutX="65.0" layoutY="265.0" text="Type" />
+      <Label layoutX="65.0" layoutY="305.0" text="Start Date/Time" />
+      <Label layoutX="65.0" layoutY="345.0" text="End Date/Time" />
+      <Label layoutX="65.0" layoutY="385.0" text="Customer ID" />
+      <Label layoutX="65.0" layoutY="425.0" text="User ID" />
+      <Label layoutX="65.0" layoutY="65.0" text="Appointment ID" />
+      <TextField fx:id="appointIdText" disable="true" layoutX="178.0" layoutY="61.0" prefWidth="155.0" promptText="Automatically Generated" />
+      <TextField fx:id="titleText" layoutX="178.0" layoutY="101.0" prefWidth="155.0" promptText="Appointment Title" />
+      <TextField fx:id="descriptionText" layoutX="178.0" layoutY="141.0" prefWidth="155.0" promptText="Appointment Description" />
+      <TextField fx:id="locationText" layoutX="178.0" layoutY="181.0" prefWidth="155.0" promptText="Appointment Location" />
+      <TextField fx:id="typeText" layoutX="178.0" layoutY="261.0" prefWidth="155.0" promptText="Type of Appointment" />
+      <ComboBox fx:id="contactCB" layoutX="178.0" layoutY="221.0" prefWidth="155.0" promptText="Choose a Contact" />
+      <ComboBox fx:id="startTimeCB" layoutX="307.0" layoutY="301.0" prefWidth="100.0" promptText="Start Time" />
+      <ComboBox fx:id="endTimeCB" layoutX="307.0" layoutY="341.0" prefWidth="100.0" promptText="End Time" />
+      <ComboBox fx:id="customerIdCB" layoutX="178.0" layoutY="381.0" prefWidth="155.0" promptText="Choose Customer ID" />
+      <ComboBox fx:id="userIdCB" layoutX="178.0" layoutY="421.0" prefWidth="155.0" promptText="Choose User ID" />
+      <DatePicker fx:id="startDate" layoutX="178.0" layoutY="301.0" prefWidth="100.0" promptText="Start Date" />
+      <DatePicker fx:id="endDate" layoutX="178.0" layoutY="341.0" prefWidth="100.0" promptText="End Date" />
+      <Button layoutX="178.0" layoutY="494.0" mnemonicParsing="false" onAction="#saveButClick" text="Save" />
+      <Button layoutX="246.0" layoutY="494.0" mnemonicParsing="false" onAction="#cancelButClick" text="Cancel" />
+   </children>
 </AnchorPane>

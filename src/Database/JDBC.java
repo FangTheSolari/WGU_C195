@@ -29,4 +29,7 @@ public abstract class JDBC {
             throwables.printStackTrace();
         }
     }
+    public static Connection getConnection(){
+        return connect;
+    }
 }
