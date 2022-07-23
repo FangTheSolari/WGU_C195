@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.CustomerController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="458.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CustomerController">
+   <children>
+      <Label layoutX="148.0" layoutY="14.0" text="Customer">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="custIdLabel" layoutX="85.0" layoutY="70.0" text="Customer ID" />
+      <Label fx:id="custNameLabel" layoutX="85.0" layoutY="110.0" text="Name" />
+      <Label fx:id="custAddressLabel" layoutX="85.0" layoutY="150.0" text="Address" />
+      <Label fx:id="custZipLabel" layoutX="85.0" layoutY="190.0" text="Postal Code" />
+      <Label fx:id="custPhoneLabel" layoutX="85.0" layoutY="230.0" text="Phone" />
+      <Label fx:id="custCountryLabel" layoutX="85.0" layoutY="270.0" text="Country" />
+      <Label fx:id="custDivisionLabel" layoutX="85.0" layoutY="310.0" text="Division" />
+      <TextField fx:id="custIdText" layoutX="185.0" layoutY="66.0" />
+      <TextField fx:id="custNameText" layoutX="185.0" layoutY="106.0" />
+      <TextField fx:id="custAddressText" layoutX="185.0" layoutY="146.0" />
+      <TextField fx:id="custZipText" layoutX="185.0" layoutY="186.0" />
+      <TextField fx:id="custPhoneText" layoutX="185.0" layoutY="226.0" />
+      <ComboBox fx:id="custCountryCB" layoutX="185.0" layoutY="266.0" prefWidth="150.0" />
+      <ComboBox fx:id="custDivisionCB" layoutX="185.0" layoutY="306.0" prefWidth="150.0" />
+      <Button layoutX="148.0" layoutY="373.0" mnemonicParsing="false" onAction="#saveButClick" text="Save" />
+      <Button layoutX="216.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancelButClick" text="Cancel" />
+   </children>
 </AnchorPane>

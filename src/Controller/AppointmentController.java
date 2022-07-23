@@ -73,11 +73,41 @@ public class AppointmentController {
         if (appointmentCustID != null) {
             for (Appointments appointments: appointmentCustID){
                 if (setAppointID == appointments.getAppointmentID()) {
-
+                    return false;
+                }
+                if (appointments.getStartTime().isBefore(endTime) && (startTime.isBefore(appointments.getEndTime()))){
+                    return true;
                 }
             }
 
         }
+        return false;
+    }
+    public boolean emptyField() {
+        if (titleText.getText().isEmpty()) {
+            return true;
+        } else if (descriptionText.getText().isEmpty()) {
+            return true;
+        } else if (locationText.getText().isEmpty()) {
+            return true;
+        } else if (contactCB.getSelectionModel().isEmpty()) {
+            return true;
+        } else if (typeText.getText().isEmpty()) {
+            return true;
+        } else if (startDate.getValue() == null) {
+            return true;
+        } else if (startTimeCB.getValue() == null) {
+            return true;
+        } else if (endDate.getValue().toString().isEmpty()) {
+            return true;
+        } else if (endTimeCB.getValue().toString().isEmpty()) {
+            return true;
+        } else if (customerIdCB.getValue().toString().isEmpty()) {
+            return true;
+        } else if (userIdCB.getValue().toString().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public void saveButClick(ActionEvent actionEvent) {

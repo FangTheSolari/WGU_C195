@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.MainController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+   <children>
+      <TableView fx:id="custTableView" layoutX="25.0" layoutY="42.0" prefHeight="250.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="custIdCol" prefWidth="70.0" text="ID" />
+          <TableColumn fx:id="custNameCol" prefWidth="199.0" text="Name" />
+            <TableColumn fx:id="custAddressCol" prefWidth="162.0" text="Address" />
+            <TableColumn fx:id="custZipCol" prefWidth="107.0" text="Postal Code" />
+            <TableColumn fx:id="custPhoneCol" prefWidth="181.0" text="Phone Number" />
+            <TableColumn fx:id="custCountryCol" prefWidth="102.0" text="Country" />
+            <TableColumn fx:id="custDivisionCol" prefWidth="178.0" text="Division" />
+        </columns>
+      </TableView>
+      <TableView fx:id="aptTableView" layoutX="25.0" layoutY="352.0" prefHeight="250.0" prefWidth="1000.0">
+        <columns>
+          <TableColumn fx:id="aptIdCol" prefWidth="103.0" text="Appointment ID" />
+          <TableColumn fx:id="aptTitleCol" prefWidth="71.0" text="Title" />
+            <TableColumn fx:id="aptDescriptionCol" prefWidth="101.0" text="Description" />
+            <TableColumn fx:id="aptLocationCol" prefWidth="95.0" text="Location" />
+            <TableColumn fx:id="aptContactCol" prefWidth="101.0" text="Contact" />
+            <TableColumn fx:id="aptTypeCol" prefWidth="114.0" text="Type" />
+            <TableColumn fx:id="aptStartCol" prefWidth="129.0" text="Start Date/Time" />
+            <TableColumn fx:id="aptEndCol" prefWidth="123.0" text="End Date/Time" />
+            <TableColumn fx:id="aptCustomerCol" prefWidth="94.0" text="Customer ID" />
+            <TableColumn fx:id="aptUserCol" minWidth="0.0" prefWidth="68.0" text="User ID" />
+        </columns>
+      </TableView>
+      <Label layoutX="25.0" layoutY="14.0" text="Customers">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="323.0" text="Appointments">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="615.0" text="Table view:" />
+      <Button layoutX="673.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCustomerButClick" text="Add Customer" />
+      <Button layoutX="790.0" layoutY="298.0" mnemonicParsing="false" onAction="#updateCustomerButClick" text="Update Customer" />
+      <Button layoutX="921.0" layoutY="298.0" mnemonicParsing="false" onAction="#deleteCustomerButClick" text="Delete Customer" />
+      <Button layoutX="633.0" layoutY="611.0" mnemonicParsing="false" onAction="#addAppointmentButClick" text="Add Appointment" />
+      <Button layoutX="759.0" layoutY="611.0" mnemonicParsing="false" onAction="#updateAppointmentButClick" text="Update Appointment" />
+      <Button layoutX="900.0" layoutY="611.0" mnemonicParsing="false" onAction="#deleteAppointmentButClick" text="Delete Appointment" />
+      <Button layoutX="482.0" layoutY="647.0" mnemonicParsing="false" onAction="#reportsButClick" text="Reports">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="appointmentAlertLabel" alignment="CENTER" layoutX="179.0" layoutY="293.0" prefHeight="61.0" prefWidth="253.0" textFill="RED">
+         <font>
+            <Font name="Roboto Light" size="12.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="86.0" layoutY="608.0" prefHeight="39.0" prefWidth="200.0">
+         <children>
+            <RadioButton fx:id="allRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="All    " />
+            <RadioButton fx:id="weekRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="Week    " />
+            <RadioButton fx:id="monthRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="Month" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
