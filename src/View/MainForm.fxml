@@ -60,9 +60,12 @@
       </Label>
       <HBox alignment="CENTER" layoutX="86.0" layoutY="608.0" prefHeight="39.0" prefWidth="200.0">
          <children>
-            <RadioButton fx:id="allRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="All    " />
-            <RadioButton fx:id="weekRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="Week    " />
-            <RadioButton fx:id="monthRadButton" mnemonicParsing="false" onAction="#aptViewToggle" text="Month" />
+            <RadioButton fx:id="allRadButton" onAction="#aptViewToggle" selected="true" text="All    ">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tGroup" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="weekRadButton" onAction="#aptViewToggle" text="Week    " toggleGroup="$tGroup" />
+            <RadioButton fx:id="monthRadButton" onAction="#aptViewToggle" text="Month" toggleGroup="$tGroup" />
          </children>
       </HBox>
    </children>

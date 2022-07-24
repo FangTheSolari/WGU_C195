@@ -46,7 +46,7 @@ public class AppointmentDAO {
                         results.getTimestamp("Start").toLocalDateTime(),
                         results.getDate("End").toLocalDate(),
                         results.getTimestamp("End").toLocalDateTime(),
-                        results.getInt("Costumer_ID"),
+                        results.getInt("Customer_ID"),
                         results.getInt("User_ID"),
                         results.getInt("Contact_ID"));
                 appointments.add(newAppointments);
@@ -59,7 +59,7 @@ public class AppointmentDAO {
         return null;
     }
 
-    public static ObservableList<Appointments> buildWeek() {
+    public static ObservableList<Appointments> weekList() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
         try {
@@ -93,7 +93,7 @@ public class AppointmentDAO {
         return null;
     }
 
-    public static ObservableList<Appointments> buildMonth() {
+    public static ObservableList<Appointments> monthList() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
         try {

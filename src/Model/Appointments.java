@@ -33,11 +33,15 @@ public class Appointments {
     this.userID=userID;
     this.contactID=contactID;
     }
+
+
     public Appointments(int aptID, LocalDate startDate, LocalDateTime startTime){
         this.aptID=aptID;
         this.startDate=startDate;
         this.startTime=startTime;
     }
+
+
     public int getAppointmentID() {
         return aptID;
     }
