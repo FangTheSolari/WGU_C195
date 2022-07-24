@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
 public class Main extends Application {
 
 
@@ -24,7 +25,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
         ResourceBundle language = ResourceBundle.getBundle("Resource/Language", Locale.getDefault());
         primaryStage.setTitle("Schedule Application");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
     }
 

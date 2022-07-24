@@ -24,7 +24,7 @@ public abstract class JDBC {
 
     public static void closeConnection() {
         try {
-            connect.close()
+            connect.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
