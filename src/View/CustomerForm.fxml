@@ -17,12 +17,12 @@
       <Label fx:id="custPhoneLabel" layoutX="85.0" layoutY="230.0" text="Phone" />
       <Label fx:id="custCountryLabel" layoutX="85.0" layoutY="270.0" text="Country" />
       <Label fx:id="custDivisionLabel" layoutX="85.0" layoutY="310.0" text="Division" />
-      <TextField fx:id="custIdText" layoutX="185.0" layoutY="66.0" />
+      <TextField fx:id="custIdText" disable="true" layoutX="185.0" layoutY="66.0" promptText="Auto Generated" />
       <TextField fx:id="custNameText" layoutX="185.0" layoutY="106.0" />
       <TextField fx:id="custAddressText" layoutX="185.0" layoutY="146.0" />
       <TextField fx:id="custZipText" layoutX="185.0" layoutY="186.0" />
       <TextField fx:id="custPhoneText" layoutX="185.0" layoutY="226.0" />
-      <ComboBox fx:id="custCountryCB" layoutX="185.0" layoutY="266.0" prefWidth="150.0" />
+      <ComboBox fx:id="custCountryCB" layoutX="185.0" layoutY="266.0" onAction="#countrySelect" prefWidth="150.0" />
       <ComboBox fx:id="custDivisionCB" layoutX="185.0" layoutY="306.0" prefWidth="150.0" />
       <Button layoutX="148.0" layoutY="373.0" mnemonicParsing="false" onAction="#saveButClick" text="Save" />
       <Button layoutX="216.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancelButClick" text="Cancel" />

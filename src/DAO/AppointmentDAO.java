@@ -7,26 +7,17 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+/**
+ * Java class that provides logic for the Appointment DAO.
+ * @author Adam Rutland-Ruiz
+ */
 
 public class AppointmentDAO {
 
-    private static Appointments newAppointments(ResultSet resultSet) throws SQLException {
-        return new Appointments(
-                resultSet.getInt("Appointment_ID"),
-                resultSet.getString("Title"),
-                resultSet.getString("Description"),
-                resultSet.getString("Location"),
-                resultSet.getString("Contact_Name"),
-                resultSet.getString("Type"),
-                resultSet.getDate("Start").toLocalDate(),
-                resultSet.getTimestamp("Start").toLocalDateTime(),
-                resultSet.getDate("End").toLocalDate(),
-                resultSet.getTimestamp("End").toLocalDateTime(),
-                resultSet.getInt("Customer_ID"),
-                resultSet.getInt("User_ID"),
-                resultSet.getInt("Contact_ID"));
-    }
-
+    /**
+     * Retreives the data for the Appointment Table view from the Appointments section of the database
+     * @return
+     */
     public static ObservableList<Appointments> appointmentData() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -59,6 +50,33 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Creates an Appointment Object from the dataabase
+     * @param resultSet
+     * @return
+     * @throws SQLException
+     */
+    private static Appointments newAppointments(ResultSet resultSet) throws SQLException {
+        return new Appointments(
+                resultSet.getInt("Appointment_ID"),
+                resultSet.getString("Title"),
+                resultSet.getString("Description"),
+                resultSet.getString("Location"),
+                resultSet.getString("Contact_Name"),
+                resultSet.getString("Type"),
+                resultSet.getDate("Start").toLocalDate(),
+                resultSet.getTimestamp("Start").toLocalDateTime(),
+                resultSet.getDate("End").toLocalDate(),
+                resultSet.getTimestamp("End").toLocalDateTime(),
+                resultSet.getInt("Customer_ID"),
+                resultSet.getInt("User_ID"),
+                resultSet.getInt("Contact_ID"));
+    }
+
+    /**
+     * Retrieves data for the Table view based on the current week.
+     * @return
+     */
     public static ObservableList<Appointments> weekList() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -93,6 +111,10 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Retrieves data for the Table view based on the current month
+     * @return
+     */
     public static ObservableList<Appointments> monthList() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -128,6 +150,10 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Sets up the Alerts for appointments that are within 15 minutes of the user's time.
+     * @return
+     */
     public static ObservableList<Appointments> appointmentAlerts() {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -153,6 +179,11 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Retrieves appointment data by Customer ID
+     * @param customerID
+     * @return
+     */
     public static ObservableList<Appointments> getCustomerID(int customerID) {
         Connection connect;
         ObservableList<Appointments> appointments = FXCollections.observableArrayList();
@@ -176,6 +207,21 @@ public class AppointmentDAO {
         return null;
     }
 
+    /**
+     * Allows the user to update the appointment data in the database.
+     * @param aptID
+     * @param title
+     * @param description
+     * @param location
+     * @param contactName
+     * @param type
+     * @param start
+     * @param end
+     * @param customerID
+     * @param userID
+     * @return
+     * @throws SQLException
+     */
     public static boolean updateAppointments(int aptID, String title, String description, String location, int contactName, String type,
                                              LocalDateTime start, LocalDateTime end, int customerID, int userID) throws SQLException {
         Connection connect;
@@ -204,6 +250,20 @@ public class AppointmentDAO {
         return false;
     }
 
+    /**
+     * Allows the user to create new appointment data for the database.
+     * @param title
+     * @param description
+     * @param location
+     * @param contactName
+     * @param type
+     * @param start
+     * @param end
+     * @param customerID
+     * @param userID
+     * @return
+     * @throws SQLException
+     */
     public static boolean createAppointment(String title, String description, String location, int contactName, String type,
                                             LocalDateTime start, LocalDateTime end, int customerID, int userID) throws SQLException {
         Connection connect;
@@ -230,7 +290,13 @@ public class AppointmentDAO {
         return false;
     }
 
-    public static boolean deleteAppointment(int AptID) throws SQLException {
+    /**
+     * Allows the user to delete appointment data from the database.
+     * @param aptID
+     * @return
+     * @throws SQLException
+     */
+    public static boolean deleteAppointment(int aptID) throws SQLException {
         Connection connect;
         try {
             connect = JDBC.getConnection();
@@ -238,7 +304,7 @@ public class AppointmentDAO {
             String sql = "DELETE FROM appointments WHERE Appointment_ID = ?;";
 
             PreparedStatement statement = connect.prepareStatement(sql);
-            statement.setInt(1, AptID);
+            statement.setInt(1, aptID);
             statement.execute();
 
         }

@@ -20,19 +20,51 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**
+ * Controller class that provides logic for the Login screen.
+ * @author Adam Rutland-Ruiz
+ */
 public class LoginController {
+    /**
+     * Location Title Label
+     */
     public Label locationTitleLabel;
+    /**
+     * Location Label
+     */
     public Label locationLabel;
+    /**
+     * Username Label
+     */
     public Label usernameLabel;
+    /**
+     * Password Label
+     */
     public Label passwordLabel;
+    /**
+     * Username Text box
+     */
     public TextField usernameText;
+    /**
+     * Password Text Box
+     */
     public TextField passwordText;
+    /**
+     * Login button
+     */
     public Button loginButton;
+    /**
+     * Error label
+     */
     public Label errorLabel;
-
+    /**
+     * Sets the language of the login screen based on the users computer laanguage (only English and French Currently)
+     */
     private final ResourceBundle setLanguage = ResourceBundle.getBundle("Resource/Language", Locale.getDefault());
 
-
+/**
+ * Initializes login and sets the paage up in the language based off the Resource bundle chosen.
+ */
     public void initialize() {
         locationLabel.setText(String.valueOf(TimeZone.getDefault().getID()));
         loginButton.setText(setLanguage.getString("login"));
@@ -40,7 +72,12 @@ public class LoginController {
         passwordLabel.setText(setLanguage.getString("password"));
     }
 
-
+    /**
+     * Validates if the username and password match the ones in the database
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void loginButClick(ActionEvent actionEvent) throws SQLException, IOException {
         if (!inputValidation()) return;
         boolean validLogin = UserDAO.validateLogin(usernameText.getText(), passwordText.getText());
@@ -60,6 +97,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Checks if the username or password text boxes are empty
+     * @return boolean checker to see if any fields are empty
+     */
     private boolean inputValidation() {
         if (usernameText.getText().isEmpty()) {
             errorLabel.setText(setLanguage.getString("username_req"));
@@ -72,7 +113,10 @@ public class LoginController {
     }
 
 
-
+    /**
+     * Creates a log if login attempts and annotates if they were failed or successful
+     * @param loginText
+     */
     private void loginActivity(String loginText) {
         try (FileWriter fileWriter = new FileWriter("login_activity.txt", true)) {
             Date date = new Date(System.currentTimeMillis());

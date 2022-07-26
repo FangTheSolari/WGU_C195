@@ -4,25 +4,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
    <children>
-      <Label layoutX="350.0" layoutY="14.0" text="Reports">
+      <Label layoutX="402.0" layoutY="14.0" text="Reports">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
-      <TableView fx:id="reportsTable" layoutX="44.0" layoutY="60.0" prefHeight="350.0" prefWidth="700.0" />
-      <HBox alignment="CENTER_LEFT" layoutX="81.0" layoutY="420.0" prefHeight="59.0" prefWidth="625.0" spacing="20.0">
+      <TableView fx:id="reportsTable" layoutX="10.0" layoutY="60.0" prefHeight="350.0" prefWidth="879.0" />
+      <HBox alignment="CENTER_LEFT" layoutX="134.0" layoutY="420.0" prefHeight="59.0" prefWidth="625.0" spacing="20.0">
          <children>
             <Label fx:id="sortByLabel" contentDisplay="CENTER" text="Sort By:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <RadioButton fx:id="typeAndMonthRadBut" mnemonicParsing="false" onAction="#sortByToggle" text="Total Appointments by Type and Month" />
-            <RadioButton fx:id="contactsRadBut" mnemonicParsing="false" onAction="#sortByToggle" text="All Contact Schedules" />
-            <RadioButton fx:id="usersRadBut" mnemonicParsing="false" onAction="#sortByToggle" text="Schedules by User" />
+            <RadioButton fx:id="typeAndMonthRadBut" mnemonicParsing="false" onAction="#sortByToggle" selected="true" text="Total Appointments by Type and Month">
+               <toggleGroup>
+                  <ToggleGroup fx:id="reportTGroup" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="contactsRadBut" mnemonicParsing="false" onAction="#sortByToggle" text="All Contact Schedules" toggleGroup="$reportTGroup" />
+            <RadioButton fx:id="usersRadBut" mnemonicParsing="false" onAction="#sortByToggle" text="Schedules by User" toggleGroup="$reportTGroup" />
          </children>
       </HBox>
-      <Button fx:id="backButton" layoutX="368.0" layoutY="492.0" mnemonicParsing="false" onAction="#backButClick" text="Back" />
+      <Button fx:id="backButton" layoutX="426.0" layoutY="490.0" mnemonicParsing="false" onAction="#backButClick" text="Back" />
    </children>
 </AnchorPane>

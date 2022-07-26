@@ -10,8 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Java class that provides logic for the Customer DAO
+ * @author Adam Rutland-Ruiz
+ */
 public class CustomerDAO {
 
+    /**
+     * Retrieves the customer data from the Customers Table in the database
+     * @return
+     */
     public static ObservableList<Customers> pullCustomerTable() {
         Connection connect;
         ObservableList<Customers> customers = FXCollections.observableArrayList();
@@ -34,13 +42,17 @@ public class CustomerDAO {
                 customers.add(newCustomer);
             }
             return customers;
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
         return null;
     }
 
-
+    /**
+     * Builds the list of customers to populate tables from the database table
+     * @return
+     */
     public static ObservableList<Customers> createCustomerList() {
         Connection connect;
         ObservableList<Customers> customers = FXCollections.observableArrayList();
@@ -55,19 +67,29 @@ public class CustomerDAO {
                 customers.add(newCustomer);
             }
             return customers;
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
         return null;
     }
 
-
+    /**
+     * Allows the user to update customer data in the database
+     * @param CustomerID
+     * @param CustomerName
+     * @param CustomerAddress
+     * @param CustomerPostalCode
+     * @param CustomerPhone
+     * @param DivisionID
+     * @return
+     * @throws SQLException
+     */
     public static boolean updateCustomer(int CustomerID, String CustomerName, String CustomerAddress, String CustomerPostalCode, String CustomerPhone, String DivisionID) throws SQLException {
         Connection connect;
         try {
             connect = JDBC.getConnection();
             String sql = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
-
             PreparedStatement statement = connect.prepareStatement(sql);
             statement.setString(1, CustomerName);
             statement.setString(2, CustomerAddress);
@@ -76,20 +98,28 @@ public class CustomerDAO {
             statement.setInt(5, Integer.parseInt(DivisionID));
             statement.setInt(6, CustomerID);
             statement.execute();
-
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
         return false;
     }
 
-
+    /**
+     * Allows the user to creat new customer data and add it to the database
+     * @param CustomerName
+     * @param CustomerAddress
+     * @param CustomerPostalCode
+     * @param CustomerPhone
+     * @param DivisionID
+     * @return
+     * @throws SQLException
+     */
     public static boolean createCustomer(String CustomerName, String CustomerAddress, String CustomerPostalCode, String CustomerPhone, String DivisionID) throws SQLException {
         Connection connect;
         try {
             connect = JDBC.getConnection();
             String sql = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
-
             PreparedStatement statement = connect.prepareStatement(sql);
             statement.setString(1, CustomerName);
             statement.setString(2, CustomerAddress);
@@ -97,28 +127,31 @@ public class CustomerDAO {
             statement.setString(4, CustomerPhone);
             statement.setInt(5, Integer.parseInt(DivisionID));
             statement.execute();
-
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
         return false;
     }
 
-    public static boolean deleteCustomer(int CustomerID) throws SQLException {
+    /**
+     * Allows the user to delete customer data from the Customer Table in the database
+     * @param custID
+     * @return
+     * @throws SQLException
+     */
+    public static boolean deleteCustomer(int custID) throws SQLException {
         Connection connect;
         try {
             connect = JDBC.getConnection();
-            String SQL = "DELETE FROM customers WHERE Customer_ID = ?;";
-
-            PreparedStatement statement = connect.prepareStatement(SQL);
-            statement.setInt(1, CustomerID);
+            String sql = "DELETE FROM customers WHERE Customer_ID = ?;";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, custID);
             statement.execute();
-
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             exception.printStackTrace();
         }
         return false;
     }
-
-
 }

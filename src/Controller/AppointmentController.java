@@ -22,20 +22,64 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
+/**
+ * Controller class that provides logic for the appointment screen.
+ * @author Adam Rutland-Ruiz
+ */
 public class AppointmentController {
+    /**
+     * Appointment ID text box
+     */
     public TextField appointIdText;
+    /**
+     * Appointment Title text box
+     */
     public TextField titleText;
+    /**
+     * Appointment Description text box
+     */
     public TextField descriptionText;
+    /**
+     * Appointment Location text box
+     */
     public TextField locationText;
+    /**
+     * Appointment Type text box
+     */
     public TextField typeText;
+    /**
+     * Contact Combo Box
+     */
     public ComboBox contactCB;
+    /**
+     * Start Time Combo Box
+     */
     public ComboBox startTimeCB;
+    /**
+     * End Time Combo Box
+     */
     public ComboBox endTimeCB;
+    /**
+     * Customer ID Box
+     */
     public ComboBox customerIdCB;
+    /**
+     * User ID Combo Box
+     */
     public ComboBox userIdCB;
+    /**
+     * Start Date date picker
+     */
     public DatePicker startDate;
+    /**
+     * End Date date picker
+     */
     public DatePicker endDate;
 
+    /**
+     *Pulls appointment data from the database and places it in the correct fields.
+     * @param appointments
+     */
     public void pullData(Appointments appointments) {
         ObservableList<String> contactList = FXCollections.observableArrayList();
         ObservableList<String> customerList = FXCollections.observableArrayList();
@@ -82,8 +126,8 @@ public class AppointmentController {
         endTimeCB.setItems(timeList);
 
         if (appointments != null) try {
-            appointIdText.setText(Integer.toString(appointments.getAppointmentID()));
-            titleText.setText(appointments.getAptTitle());
+            appointIdText.setText(Integer.toString(appointments.getAptID()));
+            titleText.setText(appointments.getTitle());
             descriptionText.setText(appointments.getDescription());
             locationText.setText(appointments.getLocation());
             contactCB.setValue(appointments.getContactID() + " - " + appointments.getContactName());
@@ -99,25 +143,37 @@ public class AppointmentController {
             exception.printStackTrace();
         }
     }
-
+    /**
+     * Removes non-integer values from the Contact Box
+     * @return Contact ID
+     */
     public int contactInt() {
         String str = String.valueOf(contactCB.getValue());
         String contactCBInt = str.replaceAll("\\D+","");
         return Integer.parseInt(contactCBInt);
     }
-
+    /**
+     * Removes non-integer values from the Customer Box
+     * @return Customer ID
+     */
     public int customerInt() {
         String str = String.valueOf(customerIdCB.getValue());
         String customerCBInt = str.replaceAll("\\D+","");
         return Integer.parseInt(customerCBInt);
     }
-
+    /**
+     * Removes non-integer values from the User Box
+     * @return user ID
+     */
     public int userInt() {
         String str = String.valueOf(userIdCB.getValue());
         String userCBInt = str.replaceAll("\\D+","");
         return Integer.parseInt(userCBInt);
     }
-
+    /**
+     * Sets the appointmentID variable for the custOverlap()
+     * @return appointment ID
+     */
     public int setAppointID(){
         int setAppointID;
         if(appointIdText.getText().isEmpty()){
@@ -127,7 +183,11 @@ public class AppointmentController {
         }
         return setAppointID;
     }
-
+    /**
+     * Validates the information in the Start and End Time
+     * ensures the times/dates do not Start after the End
+     * @return end time before start time
+     */
     public boolean timeValidator (){
         LocalDateTime startTime = LocalDateTime.of(startDate.getValue(),
                 LocalTime.parse(startTimeCB.getSelectionModel().getSelectedItem().toString()));
@@ -136,6 +196,11 @@ public class AppointmentController {
 
         return endTime.isBefore(startTime);
     }
+
+    /**
+     * Checks for Customer appointments overlapping
+     * @return true if appointments overlap, false if they do not
+     */
 
     public boolean custOverlap() {
         LocalDateTime startTime = LocalDateTime.of(startDate.getValue(),
@@ -147,7 +212,7 @@ public class AppointmentController {
         ObservableList<Appointments> appointmentCustID = AppointmentDAO.getCustomerID(customerInt());
         if (appointmentCustID != null) {
             for (Appointments appointments: appointmentCustID){
-                if (setAppointID == appointments.getAppointmentID()) {
+                if (setAppointID == appointments.getAptID()) {
                     return false;
                 }
                 if (appointments.getStartTime().isBefore(endTime) && (startTime.isBefore(appointments.getEndTime()))){
@@ -158,34 +223,56 @@ public class AppointmentController {
         }
         return false;
     }
+
+    /**
+     * Checks to make sure all fields are filled out.
+     * @return true for any empty field, false if no empty fields
+     */
     public boolean emptyField() {
         if (titleText.getText().isEmpty()) {
             return true;
-        } else if (descriptionText.getText().isEmpty()) {
+        }
+        else if (descriptionText.getText().isEmpty()) {
             return true;
-        } else if (locationText.getText().isEmpty()) {
+        }
+        else if (locationText.getText().isEmpty()) {
             return true;
-        } else if (contactCB.getSelectionModel().isEmpty()) {
+        }
+        else if (contactCB.getSelectionModel().isEmpty()) {
             return true;
-        } else if (typeText.getText().isEmpty()) {
+        }
+        else if (typeText.getText().isEmpty()) {
             return true;
-        } else if (startDate.getValue() == null) {
+        }
+        else if (startDate.getValue() == null) {
             return true;
-        } else if (startTimeCB.getValue() == null) {
+        }
+        else if (startTimeCB.getValue() == null) {
             return true;
-        } else if (endDate.getValue().toString().isEmpty()) {
+        }
+        else if (endDate.getValue().toString().isEmpty()) {
             return true;
-        } else if (endTimeCB.getValue().toString().isEmpty()) {
+        }
+        else if (endTimeCB.getValue().toString().isEmpty()) {
             return true;
-        } else if (customerIdCB.getValue().toString().isEmpty()) {
+        }
+        else if (customerIdCB.getValue().toString().isEmpty()) {
             return true;
-        } else if (userIdCB.getValue().toString().isEmpty()) {
+        }
+        else if (userIdCB.getValue().toString().isEmpty()) {
             return true;
         }
         return false;
     }
 
-
+    /**
+     * Checks for save button being clicked, if it is and any fields are empty they will comeback with an error
+     * if no empty fields will save the appointment as a new appointment if the appointment field is empty
+     * if the appointment field is not empty it will update the existing appointment in the database
+     * after saving to the database it will throw back to the main menu screen
+     * @param actionEvent save button click
+     * @throws Exception
+     */
 
     public void saveButClick(ActionEvent actionEvent) throws Exception{
         if (emptyField()) {
@@ -246,6 +333,13 @@ public class AppointmentController {
         stage.show();
     }
 
+    /**
+     * Cancel button will check if the user wants to cancel adding/updating the appointment
+     * if the answer is no then it will allow the user to go back to appointment screen
+     * if the answer is yes then the appointment screen will not send any data to the database and throw back to the main menu
+     * @param actionEvent cancel button click
+     * @throws Exception
+     */
     public void cancelButClick(ActionEvent actionEvent) throws Exception {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will clear all text fields and return you to the main menu. All information entered will not be saved. Do you wish to continue?");

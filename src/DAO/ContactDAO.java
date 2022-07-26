@@ -8,7 +8,15 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
+/**
+ * Java class that provides logic for the Contact DAO.
+ * @author Adam Rutland-Ruiz
+ */
 public class ContactDAO {
+    /**
+     * Retreives contact data from the Contacts table in the database
+     * @return
+     */
     public static ObservableList<Contacts> pullContacts() {
         Connection connect;
         ObservableList<Contacts> contacts = FXCollections.observableArrayList();
@@ -24,8 +32,9 @@ public class ContactDAO {
                 contacts.add(newContact);
             }
             return contacts;
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
         }
         return null;
     }
